@@ -92,3 +92,7 @@ h3 {
 .results a:hover {
     background-color: #555;
 }
+
+.span {
+    content: "\1F3AF";
+}
