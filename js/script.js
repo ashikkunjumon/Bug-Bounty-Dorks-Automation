@@ -4,7 +4,7 @@ function generateLinks() {
         { category: 'Legacy Apps', dork: 'site:' + domain + ' ext:php | ext:aspx | ext:asp | ext:jsp | ext:html | ext:htm' },
         { category: 'Juicy Extensions 1', dork: 'site:' + domain + ' ext:log | ext:txt | ext:conf | ext:cnf | ext:ini | ext:env | ext:sh | ext:bak | ext:backup | ext:tmp | ext:swp | ext:old | ext:~ | ext:git | ext:svn | ext:htpasswd | ext:htaccess | ext:xml | ext:tar | ext:sql.gz | ext:cfg' },
         { category: 'Juicy Extensions 2', dork: 'site:' + domain + ' ext:json | ext:pdf | ext:pwd | ext:yaml | ext:yml | ext:sql | ext:zip | ext:config | ext:java | ext:ora | ext:xsd | ext:xls | ext:xlsx | ext:reg | ext:gz | ext:csv | ext:docx | ext:password | ext:pem | ext:rdp | ext:inf' },
-        { category: 'URL Parameters', dork: 'site:' + domain + ' inurl:url= | inurl:return= | inurl:next= | inurl:redir= inurl:http' },
+        { category: 'URL Parameters', dork: 'site:' + domain + ' inurl:url= | inurl:return= | inurl:*.php?= | inurl:next= | inurl:redir= inurl:http' },
         { category: 'URL Query Strings', dork: 'site:' + domain + ' inurl:http | inurl:url= | inurl:path= | inurl:dest= | inurl:html= | inurl:data= | inurl:domain= | inurl:page= inurl:&' },
         { category: 'High % inurl keywords', dork: 'site:' + domain + ' inurl:config | inurl:env | inurl:setting | inurl:backup | inurl:admin | inurl:php' },
         { category: 'Sensitive Parameters', dork: 'site:' + domain + ' inurl:email= | inurl:phone= | inurl:password= | inurl:secret= inurl:&' },
