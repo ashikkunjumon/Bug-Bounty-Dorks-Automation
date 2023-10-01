@@ -2,7 +2,7 @@ function generateLinks() {
     var domain = document.getElementById('domain').value.trim();
     var dorks = [
         { category: 'Legacy Apps', dork: 'site:' + domain + ' ext:php | ext:aspx | ext:asp | ext:jsp | ext:html | ext:htm' },
-        { category: 'Juicy Extensions 1', dork: 'site:' + domain + ' confidential | “employee only” | proprietary | top secret | classified | trade secret | internal | private | WS_FTP | ws_ftp | log | LOG filetype:log' },
+        { category: 'Juicy Extensions 1', dork: 'site:' + domain + ' | confidential | “employee only” | proprietary | top secret | classified | trade secret | internal | private | WS_FTP | ws_ftp | log | LOG filetype:log' },
         { category: 'Juicy Extensions 2', dork: 'site:' + domain + ' ext:log | ext:txt | ext:conf | ext:cnf | ext:ini | ext:env | ext:sh | ext:bak | ext:backup | ext:tmp | ext:swp | ext:old | ext:~ | ext:git | ext:svn | ext:htpasswd | ext:htaccess | ext:xml | ext:tar | ext:sql.gz | ext:cfg' },
         { category: 'Juicy Extensions 3', dork: 'site:' + domain + ' ext:json | ext:pdf | ext:pwd | ext:yaml | ext:yml | ext:sql | ext:zip | ext:config | ext:java | ext:ora | ext:xsd | ext:xls | ext:xlsx | ext:reg | ext:gz | ext:csv | ext:docx | ext:password | ext:pem | ext:rdp | ext:inf' },
         { category: 'URL Parameters', dork: 'site:' + domain + ' inurl:url= | inurl:return= | inurl:php?= | inurl:next= | inurl:redir= inurl:http' },
