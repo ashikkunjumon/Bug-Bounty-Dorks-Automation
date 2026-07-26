@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Bug-Bounty Dorks Automation">
+  <circle cx="28" cy="28" r="20" fill="none" stroke="#08944e" stroke-width="5"/>
+  <circle cx="28" cy="28" r="8" fill="none" stroke="#ffaa00" stroke-width="4"/>
+  <path d="M28 2v10M28 44v10M2 28h10M44 28h10" stroke="#ffaa00" stroke-width="4" stroke-linecap="round"/>
+  <path d="M43 43l17 17" stroke="#69f0ae" stroke-width="7" stroke-linecap="round"/>
+</svg>

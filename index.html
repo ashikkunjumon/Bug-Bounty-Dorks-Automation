@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Generate search-engine dorks for a target domain, or find organisations running bug bounty and vulnerability disclosure programs.">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/effects.css">
+    <link rel="icon" type="image/svg+xml" href="images/logo.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+    <title>Bug-Bounty Dorks Automation</title>
+</head>
+
+<body>
+    <main>
+        <h1>
+            <img class="logo" src="images/logo.svg" alt="" width="40" height="40">
+            <span class="title">Bug-Bounty Dorks Automation</span>
+        </h1>
+        <p class="tagline">Dorks for a target, or dorks to find a target</p>
+
+        <div class="tabs" role="tablist" aria-label="Mode">
+            <button type="button" class="tab" id="tab-target" role="tab"
+                    aria-selected="true" aria-controls="panel-target" tabindex="0">
+                Target dorks
+            </button>
+            <button type="button" class="tab" id="tab-programs" role="tab"
+                    aria-selected="false" aria-controls="panel-programs" tabindex="-1">
+                Find programs
+            </button>
+        </div>
+
+        <!-- Mode 1: dorks scoped to a domain you are already testing -->
+        <div id="panel-target" role="tabpanel" aria-labelledby="tab-target">
+        <form id="dork-form" class="controls" autocomplete="off">
+            <div class="field">
+                <label for="domain">Target domain</label>
+                <input class="search-bar" type="text" name="domain" id="domain"
+                       placeholder="example.com" spellcheck="false" autocapitalize="none">
+            </div>
+
+            <fieldset class="scope">
+                <legend>Scope</legend>
+                <label class="check">
+                    <input type="checkbox" id="wildcard">
+                    <span>Include subdomains <code>site:*.domain</code></span>
+                </label>
+                <label class="check">
+                    <input type="checkbox" id="exclude-www">
+                    <span>Exclude <code>www</code></span>
+                </label>
+            </fieldset>
+
+            <button class="button-85" type="submit">Generate Links</button>
+        </form>
+        </div>
+
+        <!-- Mode 2: find organisations that run disclosure programmes -->
+        <div class="controls" id="panel-programs" role="tabpanel" aria-labelledby="tab-programs" hidden>
+            <div class="field">
+                <label for="region">Region or sector</label>
+                <select id="region" class="select"></select>
+            </div>
+            <p class="inline-note">
+                Results update as you change the region. No target needed.
+            </p>
+        </div>
+
+        <div class="engine-row">
+            <label for="engine">Search engine</label>
+            <select id="engine" class="select">
+                <optgroup label="Full operator support">
+                    <option value="google">Google</option>
+                    <option value="startpage">Startpage</option>
+                </optgroup>
+                <optgroup label="Partial — operators rewritten">
+                    <option value="duckduckgo">DuckDuckGo</option>
+                    <option value="brave">Brave</option>
+                    <option value="bing">Bing</option>
+                    <option value="yandex">Yandex</option>
+                </optgroup>
+            </select>
+        </div>
+        <p class="note" id="engine-note" hidden></p>
+
+        <p class="note" id="note-target">
+            These dorks are written in Google syntax; Google and Startpage run them unchanged.
+            Only test targets you are authorised to test.
+        </p>
+        <p class="note" id="note-programs" hidden>
+            Finds organisations advertising a disclosure policy. Always read the published scope
+            and rules before testing anything you find here.
+        </p>
+
+        <div class="results" id="results"></div>
+
+        <footer class="site-footer">
+            <p>&copy; 2026 Ashik Kunjumon</p>
+        </footer>
+    </main>
+
+    <script src="js/engines.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/dorks-target.js"></script>
+    <script src="js/dorks-programs.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/effects.js"></script>
+</body>
+
+</html>

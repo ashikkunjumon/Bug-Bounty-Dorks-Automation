@@ -1,0 +1,106 @@
+/* Responsive overrides. Must load after style.css. */
+
+@media (max-width: 560px) {
+    /* Stay in row direction and stack via a full-width basis. Switching to
+       flex-direction:column would make flex-basis size the height instead. */
+    .field,
+    .scope,
+    .button-85 {
+        flex: 1 1 100%;
+    }
+
+    .controls {
+        gap: 14px;
+        padding: 16px;
+    }
+
+    .check {
+        align-items: flex-start;
+    }
+
+    .check span {
+        min-width: 0;
+    }
+
+    /* Equal-width tabs, so the two labels never wrap onto second lines. */
+    .tabs {
+        gap: 6px;
+    }
+
+    .tab {
+        flex: 1 1 0;
+        min-width: 0;
+        padding: 10px 6px;
+        font-size: 14px;
+    }
+
+    h1 {
+        gap: 10px;
+    }
+
+    .tagline {
+        margin-bottom: 20px;
+        font-size: 14px;
+    }
+
+    .panel {
+        padding: 14px;
+    }
+
+    /* Copy sits in the corner of the dork rather than on its own row. Giving
+       each of 62 dorks an extra row roughly doubles the page height. */
+    .dork-row {
+        display: block;
+        position: relative;
+    }
+
+    .dork {
+        display: block;
+        width: 100%;
+        min-height: 44px;
+        padding-right: 62px;
+    }
+
+    /* Touch targets: 30px minimum so the button is comfortably hittable. */
+    .copy-btn {
+        min-height: 30px;
+        padding: 6px 12px;
+    }
+
+    .dork-row .copy-btn {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        background: var(--panel);
+    }
+
+    /* Language badge becomes a chip above its dork. */
+    .dork-label {
+        display: inline-flex;
+        min-width: 0;
+        margin-bottom: 5px;
+        padding: 2px 9px;
+    }
+}
+
+@media (max-width: 400px) {
+    body {
+        padding: 18px 12px 48px;
+    }
+
+    /* At this width the logo beside a two-line title reads as detached. */
+    h1 {
+        flex-direction: column;
+        gap: 8px;
+        font-size: 24px;
+    }
+
+    .engine-row {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .dork {
+        font-size: 12px;
+    }
+}

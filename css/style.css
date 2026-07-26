@@ -1,0 +1,425 @@
+:root {
+    --bg: #192438;
+    --panel: #202e47;
+    --card: #2a3a56;
+    --border: #3c4e6d;
+    --text: #eef2f8;
+    --muted: #9fb0c9;
+    --accent: #08944e;
+    --accent-hover: #ffaa00;
+    --link: #69f0ae;
+    --danger: #ff6b6b;
+    --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+/* An author `display` declaration beats the UA sheet's [hidden]{display:none},
+   so panels using display:flex would stay visible when hidden. Restore it. */
+[hidden] {
+    display: none !important;
+}
+
+body {
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    margin: 0;
+    padding: 24px 16px 32px;
+    background-color: var(--bg);
+    color: var(--text);
+    line-height: 1.5;
+    /* Sticky footer: fill the viewport so the footer sits on the bottom edge
+       when content is short, and follows content when it is not.
+       dvh accounts for mobile browser chrome; vh is the fallback. */
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    /* Grow to absorb spare height, so margin-top:auto on the footer works. */
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+}
+
+h1 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    font-size: clamp(24px, 5vw, 36px);
+    margin: 0 0 4px;
+    text-align: center;
+}
+
+.logo {
+    flex: 0 0 auto;
+    width: clamp(28px, 6vw, 40px);
+    height: auto;
+}
+
+.tagline {
+    margin: 0 0 28px;
+    text-align: center;
+    color: var(--muted);
+}
+
+/* tabs */
+.tabs {
+    display: flex;
+    gap: 6px;
+    justify-content: center;
+    margin-bottom: 16px;
+}
+
+.tab {
+    padding: 10px 22px;
+    background: transparent;
+    color: var(--muted);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 15px;
+    font-family: inherit;
+    font-weight: 600;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.tab:hover {
+    color: var(--text);
+    border-color: var(--muted);
+}
+
+.tab.active {
+    background: var(--accent);
+    color: #fff;
+    border-color: var(--accent);
+}
+
+.tab:focus-visible {
+    outline: 2px solid var(--accent-hover);
+    outline-offset: 2px;
+}
+
+/* engine picker */
+/* Lives outside both panels: the engine choice carries across modes. */
+.engine-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 14px;
+}
+
+.engine-row label {
+    font-size: 13px;
+    color: var(--muted);
+}
+
+.engine-row .select {
+    width: auto;
+    min-width: 150px;
+}
+
+.inline-note {
+    flex: 1 1 220px;
+    margin: 0;
+    font-size: 13px;
+    color: var(--muted);
+}
+
+/* controls */
+.controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    align-items: flex-end;
+    justify-content: center;
+    padding: 20px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex: 1 1 220px;
+    min-width: 0;
+}
+
+.field label {
+    font-size: 13px;
+    color: var(--muted);
+}
+
+.search-bar,
+.select {
+    padding: 10px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    width: 100%;
+    font-size: 15px;
+    background-color: #16203a;
+    color: var(--text);
+    font-family: inherit;
+}
+
+.search-bar::placeholder {
+    color: #6b7d99;
+}
+
+.search-bar:focus-visible,
+.select:focus-visible,
+.button-85:focus-visible,
+.copy-btn:focus-visible,
+.pivot:focus-visible,
+.dork:focus-visible,
+.check input:focus-visible {
+    outline: 2px solid var(--accent-hover);
+    outline-offset: 2px;
+}
+
+.scope {
+    flex: 1 1 240px;
+    margin: 0;
+    padding: 8px 12px 12px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+}
+
+.scope legend {
+    font-size: 13px;
+    color: var(--muted);
+    padding: 0 6px;
+}
+
+.check {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.check code {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--link);
+}
+
+.button-85 {
+    padding: 11px 24px;
+    background-color: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 600;
+    font-family: inherit;
+    transition: background-color 0.2s;
+    flex: 0 0 auto;
+}
+
+.button-85:hover {
+    background-color: var(--accent-hover);
+}
+
+.note {
+    margin: 14px 2px 0;
+    font-size: 13px;
+    color: var(--muted);
+    text-align: center;
+}
+
+/* results */
+.results {
+    margin-top: 28px;
+    /* Keeps the footer rule off the last dork on long pages; harmless on
+       short ones, where the footer's auto margin absorbs it anyway. */
+    margin-bottom: 40px;
+    text-align: left;
+}
+
+.panel {
+    margin-bottom: 28px;
+    padding: 18px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+}
+
+.panel h2 {
+    margin: 0;
+    font-size: 17px;
+    color: var(--accent-hover);
+}
+
+.panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+/* Recon pivots */
+
+.pivots {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 14px;
+}
+
+.pivot {
+    padding: 7px 14px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    color: var(--link);
+    text-decoration: none;
+    font-size: 14px;
+    transition: background-color 0.2s;
+}
+
+.pivot:hover {
+    background: var(--accent);
+    color: #fff;
+}
+
+/* Dork cards */
+
+.category {
+    margin-bottom: 10px;
+}
+
+.category-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin: 18px 0 6px;
+}
+
+.category h4 {
+    margin: 0;
+    font-size: 15px;
+    color: var(--accent-hover);
+}
+
+/* Dork text and its copy button share a row so the button tracks the link. */
+.dork-row {
+    display: flex;
+    align-items: stretch;
+    gap: 8px;
+}
+
+.dork-row .copy-btn {
+    flex: 0 0 auto;
+    align-self: stretch;
+}
+
+/* Names the language on non-English dorks. */
+.dork-label {
+    display: flex;
+    align-items: center;
+    flex: 0 0 auto;
+    min-width: 84px;
+    padding: 0 10px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-size: 12px;
+    color: var(--accent-hover);
+    white-space: nowrap;
+}
+
+.dork {
+    display: block;
+    flex: 1 1 auto;
+    min-width: 0;
+    padding: 10px 12px;
+    background-color: var(--card);
+    color: var(--link);
+    text-decoration: none;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    transition: background-color 0.2s;
+    font-family: var(--mono);
+    font-size: 13px;
+    /* Long dorks must wrap rather than push the page sideways on mobile. */
+    overflow-wrap: anywhere;
+    /* Keep operator syntax in reading order around RTL phrases. */
+    unicode-bidi: isolate;
+}
+
+.dork:hover {
+    background-color: #35486a;
+}
+
+.copy-btn {
+    padding: 5px 12px;
+    background: transparent;
+    color: var(--muted);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    cursor: pointer;
+    font-size: 12px;
+    font-family: inherit;
+    white-space: nowrap;
+    transition: color 0.2s, border-color 0.2s;
+}
+
+.copy-btn:hover {
+    color: var(--text);
+    border-color: var(--muted);
+}
+
+.copy-btn.copied {
+    color: var(--link);
+    border-color: var(--link);
+}
+
+.error {
+    padding: 12px;
+    background: rgba(255, 107, 107, 0.1);
+    border: 1px solid var(--danger);
+    border-radius: 6px;
+    color: var(--danger);
+}
+
+.hint {
+    padding: 18px;
+    text-align: center;
+    color: var(--muted);
+    border: 1px dashed var(--border);
+    border-radius: 8px;
+}
+
+/* footer */
+.site-footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* auto pins it to the bottom when there is spare height, and collapses
+       to nothing when the page is long. 48px keeps it off long content. */
+    margin-top: auto;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    font-size: 13px;
+    color: var(--muted);
+}
+
+.site-footer p {
+    margin: 0;
+    text-align: center;
+}

@@ -1,0 +1,276 @@
+/* Background effects, module glow and typography refinements.
+ * Layered on top of style.css - every rule here is additive, so deleting this
+ * file and its <link> returns the page to its previous appearance exactly.
+ */
+
+:root {
+    /* Hues sampled to sit against the #192438 background rather than fight it. */
+    --glow-green: 8, 148, 78;
+    --glow-mint: 105, 240, 174;
+    --glow-teal: 13, 143, 138;
+    --glow-blue: 42, 111, 174;
+}
+
+/* A - bottom glow */
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    pointer-events: none;
+    background:
+        radial-gradient(130% 60% at 50% 100%,
+            rgba(var(--glow-green), 0.34) 0%,
+            rgba(var(--glow-teal), 0.14) 34%,
+            rgba(var(--glow-blue), 0.06) 56%,
+            transparent 76%);
+    /* Two slow cycles at different periods: the hue drifts across the
+       green-teal-blue range while the whole layer breathes. */
+    animation: glowBreathe 16s ease-in-out infinite,
+               glowShift 26s ease-in-out infinite;
+}
+
+@keyframes glowBreathe {
+    0%, 100% { opacity: 0.8; transform: translateY(6px) scale(1); }
+    50%      { opacity: 1;   transform: translateY(-10px) scale(1.04); }
+}
+
+@keyframes glowShift {
+    0%, 100% { filter: hue-rotate(0deg)   saturate(1); }
+    33%      { filter: hue-rotate(-26deg) saturate(1.12); }
+    66%      { filter: hue-rotate(14deg)  saturate(0.94); }
+}
+
+/* A second, dimmer pool keeps the very bottom edge from banding. */
+body::after {
+    content: '';
+    position: fixed;
+    left: 50%;
+    bottom: -22vh;
+    width: 84vw;
+    height: 44vh;
+    z-index: -2;
+    pointer-events: none;
+    transform: translateX(-50%);
+    background: radial-gradient(closest-side,
+        rgba(var(--glow-mint), 0.10), transparent 72%);
+    filter: blur(28px);
+    animation: glowShift 26s ease-in-out infinite reverse;
+}
+
+/* C - rising particles */
+.fx-particles {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.fx-dot {
+    position: absolute;
+    bottom: -14px;
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: rgba(var(--glow-mint), 0.9);
+    box-shadow: 0 0 6px rgba(var(--glow-mint), 0.5);
+    opacity: 0;
+    will-change: transform, opacity;
+    animation: dotRise linear infinite;
+}
+
+@keyframes dotRise {
+    0%   { transform: translateY(0) scale(0.55); opacity: 0; }
+    14%  { opacity: 0.5; }
+    60%  { opacity: 0.26; }
+    100% { transform: translateY(-56vh) scale(1); opacity: 0; }
+}
+
+/* D - results rise in */
+.category,
+.panel {
+    animation: riseIn 420ms cubic-bezier(0.22, 0.8, 0.3, 1) backwards;
+}
+
+@keyframes riseIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* medium module glow */
+.controls,
+.panel {
+    box-shadow:
+        0 1px 2px rgba(0, 0, 0, 0.30),
+        0 12px 34px rgba(0, 0, 0, 0.26),
+        0 0 26px -8px rgba(var(--glow-green), 0.30);
+    transition: box-shadow 260ms ease, border-color 260ms ease;
+}
+
+.panel:hover {
+    border-color: #4a5f82;
+    box-shadow:
+        0 1px 2px rgba(0, 0, 0, 0.30),
+        0 14px 38px rgba(0, 0, 0, 0.30),
+        0 0 34px -6px rgba(var(--glow-green), 0.42);
+}
+
+.button-85 {
+    box-shadow: 0 4px 14px -3px rgba(var(--glow-green), 0.55);
+}
+
+.button-85:hover {
+    box-shadow: 0 6px 20px -3px rgba(255, 170, 0, 0.5);
+}
+
+.dork:hover {
+    box-shadow: 0 0 18px -6px rgba(var(--glow-green), 0.45);
+}
+
+/* small glow on the tool buttons */
+/* Kept low-alpha and tight-radius: enough to lift the control off the panel
+   without competing with the primary action or the background wash. */
+.tab,
+.copy-btn,
+.pivot {
+    transition: box-shadow 200ms ease, border-color 200ms ease, color 200ms ease;
+}
+
+.tab {
+    box-shadow: 0 0 10px -5px rgba(var(--glow-mint), 0.30);
+}
+
+.tab:hover {
+    box-shadow: 0 0 14px -4px rgba(var(--glow-mint), 0.45);
+}
+
+/* The active tab carries the accent, so its glow matches the primary button. */
+.tab.active {
+    box-shadow: 0 2px 12px -3px rgba(var(--glow-green), 0.60);
+}
+
+.pivot {
+    box-shadow: 0 0 9px -5px rgba(var(--glow-mint), 0.32);
+}
+
+.pivot:hover {
+    box-shadow: 0 0 15px -4px rgba(var(--glow-green), 0.55);
+}
+
+.copy-btn {
+    box-shadow: 0 0 8px -5px rgba(var(--glow-mint), 0.28);
+}
+
+.copy-btn:hover {
+    box-shadow: 0 0 13px -4px rgba(var(--glow-mint), 0.48);
+}
+
+/* Confirmation flash when a dork lands on the clipboard. */
+.copy-btn.copied {
+    box-shadow: 0 0 14px -3px rgba(var(--glow-green), 0.70);
+}
+
+/* typography */
+h1 {
+    gap: 14px;
+    margin-bottom: 8px;
+    font-size: clamp(27px, 5.4vw, 42px);
+    font-weight: 800;
+    letter-spacing: -0.028em;
+}
+
+/* Gradient sits on the text span, not the h1, so the logo is not clipped. */
+.title {
+    background: linear-gradient(102deg,
+        #ffffff 0%,
+        #d8f5e6 34%,
+        rgba(var(--glow-mint), 1) 68%,
+        rgba(var(--glow-green), 1) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+}
+
+.logo {
+    filter: drop-shadow(0 0 10px rgba(var(--glow-green), 0.45));
+}
+
+.tagline {
+    margin-bottom: 30px;
+    font-size: 15px;
+    font-weight: 400;
+    letter-spacing: 0.01em;
+    color: #93a6c0;
+}
+
+.panel h2 {
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 0.005em;
+}
+
+.category h4 {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.085em;
+    text-transform: uppercase;
+    color: #b8c6da;
+}
+
+.tab {
+    letter-spacing: 0.005em;
+}
+
+.dork {
+    font-size: 12.5px;
+    letter-spacing: 0.002em;
+    line-height: 1.55;
+}
+
+.site-footer {
+    letter-spacing: 0.02em;
+}
+
+/* mobile restraint */
+@media (max-width: 560px) {
+    /* Half the particles and a tighter glow: a phone GPU is doing this while
+       also compositing 62 animated rows. */
+    .fx-dot:nth-child(2n) { display: none; }
+
+    body::before { animation-duration: 20s, 30s; }
+    body::after { display: none; }
+
+    .controls,
+    .panel {
+        box-shadow:
+            0 1px 2px rgba(0, 0, 0, 0.30),
+            0 8px 22px rgba(0, 0, 0, 0.24),
+            0 0 18px -8px rgba(var(--glow-green), 0.26);
+    }
+
+    /* Hover never fires on touch, and a tapped element can keep :hover stuck
+       afterwards - leaving a glow lit on a control the user has moved past.
+       Resting glows stay; they are static and cheap. */
+    .panel:hover,
+    .dork:hover { box-shadow: none; }
+
+    .tab:hover { box-shadow: 0 0 10px -5px rgba(var(--glow-mint), 0.30); }
+    .tab.active:hover { box-shadow: 0 2px 12px -3px rgba(var(--glow-green), 0.60); }
+    .pivot:hover { box-shadow: 0 0 9px -5px rgba(var(--glow-mint), 0.32); }
+    .copy-btn:hover { box-shadow: 0 0 8px -5px rgba(var(--glow-mint), 0.28); }
+
+    h1 { font-size: clamp(23px, 7vw, 30px); }
+}
+
+/* accessibility */
+@media (prefers-reduced-motion: reduce) {
+    body::before,
+    body::after,
+    .fx-dot,
+    .category,
+    .panel { animation: none !important; }
+
+    .fx-particles { display: none !important; }
+}
